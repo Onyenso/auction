@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -130,6 +131,8 @@ USE_I18N = True
 
 USE_L10N = True
 
+# If you uncomment this, bad things will happen in production
+# https://stackoverflow.com/questions/68024060/assertionerror-database-connection-isnt-set-to-utc
 # USE_TZ = True
 
 
@@ -146,7 +149,7 @@ MEDIA_URL = '/media/'
 
 django_on_heroku.settings(locals(), staticfiles=False)
 
-
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 
