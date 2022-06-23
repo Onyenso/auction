@@ -17,12 +17,11 @@ from .forms import ListingForm, BidForm, CommentForm
 def index(request):
 
     listings = Listing.objects.all().filter(active=True)
-
     dic = {}
-
     i = 1
+
     for listing in listings:
-        dic[f"{i}"] = listing
+        dic[i] = listing
         i += 1
 
     return render(request, "auctions/index.html", {"listings": listings, "badge": badge_count(request), "dic": dic})
@@ -53,12 +52,9 @@ def login_view(request):
 
 
 
-
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse("index"))
-
-
 
 
 
@@ -120,7 +116,7 @@ def create(request):
 
             # Insert new bid for the new listing. This bid is the bid the creator set, by default it's 0.00
             Bid.objects.create(user=request.user, listing=listing_instance, bid=request.POST["bid"])
-
+            
             # Redirect to index view
             return HttpResponseRedirect(reverse("index"))
 

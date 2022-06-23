@@ -64,13 +64,11 @@ class Comment(models.Model):
     comment = models.CharField(max_length=250)
 
     def __str__(self):
-
         return f"{self.user.username.capitalize()}"
 
 
 
 class Watchlist(models.Model):
-
     item = models.ForeignKey("Listing", on_delete=models.CASCADE, blank=True, related_name="+")
     user = models.ForeignKey(User, on_delete=models.CASCADE, to_field="username")
 
